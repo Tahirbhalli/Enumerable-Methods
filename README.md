@@ -1,12 +1,11 @@
-# buble-sort
+# Enumeration
 > Project built using basic Ruby.
   This project contains:
-- A method #bubble_sort that takes an array and returns a sorted array.
-- A similar method called #bubble_sort_by which sorts an array by accepting a block.
+- A Module Enumeration which contains different method with different functionalitys.
+
 
 # What it does
-It takes two arays and sort them with different arguments.
-
+We use these method with namespace for different uses
 ## Built With
 - Ruby
 
@@ -25,11 +24,6 @@ Contributions, issues and feature requests are welcome! Start by:
 Special thanks to [The Odin Project](https://www.theodinproject.com/courses/ruby-programming/lessons/advanced-building-blocks) 
 
 ## Authors
-
-👤 **Sergio Perdomo**
-
-- Github: [@sddoe](https://github.com/sddoe)
-- Linkedin: [sergio-perdomo](https://www.linkedin.com/in/sergio-david-perdomo-rivera-07b6b7b8/)
 
 👤 **Tahir Ahmad**
 
