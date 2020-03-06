@@ -33,6 +33,7 @@ module Enumerable
     self.each do |i|  
       result=yield i
       next unless result == true
+      
       puts i
     end
   end
@@ -46,6 +47,7 @@ module Enumerable
     self.my_each do |i|
       result = yield i
       next unless result == false
+
       return false
     end
     true
@@ -59,6 +61,7 @@ module Enumerable
     self.my_each do |i|
       result=yield i
       next unless result == true
+
       return false
     end
     true
@@ -72,6 +75,7 @@ module Enumerable
     self.my_each do |i|
         res=yield i
         next unless res == true
+
         return true
     end
     false
@@ -107,18 +111,17 @@ module Enumerable
       error_msg
       return
     end
-    res=1
+    res = 1
     self.my_each do |i|
-        res = yield i,res
+      res = yield i, res
     end
     res
   end
-
 end
 
 arr = [1, 2, 3, 4, 5]
 arr.my_each do |i|
-    puts i
+  puts i
 end
 =begin
 def multiply_els(arr)
