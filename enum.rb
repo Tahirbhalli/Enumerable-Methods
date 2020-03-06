@@ -144,11 +144,11 @@ arr = arr.my_map do |x|
 end
 
 val = %w[this is tahir].my_none? do |i|
-  i.length == 3 ? true : false
+  i.length == 3
 end
 puts val
 arr.my_each_with_index
 
 arr.my_select do |x|
-  x >= 3 ? true : false
+  x >= 3
 end
