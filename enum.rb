@@ -111,7 +111,8 @@ module Enumerable
       return
     end
     res = 1
-    self.length.times do |i|
+    ar = self
+    ar.length.times do |i|
       res = yield self[i], res
     end
     res
