@@ -140,7 +140,7 @@ arr.my_each do |i|
   puts i
 end
 arr = arr.my_map do |x|
-  x = x * 2
+  x * 2
 end
 
 val = %w[this is tahir].my_none? do |i|
