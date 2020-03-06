@@ -1,9 +1,10 @@
 module Enumerable
   def error_msg
-    puts "wrong block"
+    puts 'wrong block'
   end
+
   def my_each
-    if !block_given?
+    unless block_given?
       error_msg
       return
     end
@@ -11,8 +12,9 @@ module Enumerable
       yield el
     end
   end
+
   def my_each_with_index
-    if !block_given?
+    unless block_given?
       error_msg
       return
     end
@@ -22,8 +24,9 @@ module Enumerable
       i = yield i
     end
   end
+
   def my_select
-    if !block_given?
+    unless block_given?
       error_msg
       return
     end
@@ -33,8 +36,9 @@ module Enumerable
       puts i
     end
   end
+
   def my_all?
-    if !block_given?
+    unless block_given?
       error_msg
       return
     end
@@ -46,8 +50,9 @@ module Enumerable
     end
     true
   end
+
   def my_none?
-    if !block_given?
+    unless block_given?
       error_msg
       return
     end
@@ -58,8 +63,9 @@ module Enumerable
     end
     true
   end
+
   def my_any?
-    if !block_given?
+    unless block_given?
       error_msg
       return
     end
@@ -70,6 +76,7 @@ module Enumerable
     end
     false
   end
+
   def my_count
     if block_given?
       error_msg
@@ -81,8 +88,9 @@ module Enumerable
     end
     i
   end
+
   def my_map
-    if !block_given?
+    unless block_given?
       error_msg
       return
     end
@@ -93,8 +101,9 @@ module Enumerable
     end
     self
   end
+
   def my_inject
-    if !block_given?
+    unless block_given?
       error_msg
       return
     end
@@ -104,10 +113,14 @@ module Enumerable
     end
     res
   end
-  
+
 end
 
 arr = [1, 2, 3, 4, 5]
+arr.my_each do |i|
+    puts i
+end
+=begin
 def multiply_els(arr)
   v = arr.my_inject do |i,j|
     i * j
@@ -119,7 +132,7 @@ arr = arr.my_map do |x|
   x *= 2
 end
 multiply_els(arr)
-=begin
+
 val = %w[this is tahir].my_none? do |i|
   if i.length == 3
     true
