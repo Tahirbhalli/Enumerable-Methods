@@ -111,8 +111,7 @@ module Enumerable
       return
     end
     res = 1
-    len = self.length
-    len.times do |i|
+    self.length.times do |i|
       res = yield self[i], res
     end
     res
@@ -121,7 +120,7 @@ end
 
 arr = [1, 2, 3, 4, 5]
 def multiply_els(arr)
-  v = arr.my_inject do |i,j|
+  v = arr.my_inject do |i, j|
     i * j
   end
   puts v
