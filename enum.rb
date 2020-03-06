@@ -15,7 +15,7 @@ module Enumerable
   end
 
   def my_each_with_index
-    unless block_given?
+    if block_given?
       error_msg
       return
     end
@@ -23,7 +23,7 @@ module Enumerable
     ar = self
     ar.my_each do |element|
       puts(i.to_s + ' index has ' + element.to_s)
-      i = yield i
+      i += i
     end
   end
 
@@ -150,13 +150,10 @@ val = %w[this is tahir].my_none? do |i|
     false
   end
 end
-arr.my_each_with_index do |x|
-  x += 1
-end
+arr.my_each_with_index
+
 arr.my_select do |x|
-  if x >= 3
+  unless x >=3
     true
-  else
-    false
   end
 end
