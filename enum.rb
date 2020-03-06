@@ -104,6 +104,7 @@ module Enumerable
     end
     res
   end
+  
 end
 
 arr = [1, 2, 3, 4, 5]
