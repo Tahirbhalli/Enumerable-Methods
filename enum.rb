@@ -8,7 +8,8 @@ module Enumerable
       error_msg
       return
     end
-    self.each do |el|
+    ar = self
+    ar.each do |el|
       yield el
     end
   end
@@ -19,7 +20,8 @@ module Enumerable
       return
     end
     i = 0
-    self.my_each do |element|
+    ar = self
+    ar.my_each do |element|
       puts(i.to_s + ' index has ' + element.to_s)
       i = yield i
     end
@@ -30,7 +32,8 @@ module Enumerable
       error_msg
       return
     end
-    self.each do |i|
+    ar = self
+    ar.each do |i|
       result = yield i
       next unless result == true
 
@@ -43,7 +46,8 @@ module Enumerable
       error_msg
       return
     end
-    self.my_each do |i|
+    ar = self
+    ar.my_each do |i|
       result = yield i
       next unless result == false
 
@@ -57,7 +61,8 @@ module Enumerable
       error_msg
       return
     end
-    self.my_each do |i|
+    ar = self
+    ar.my_each do |i|
       result = yield i
       next unless result == true
 
@@ -71,7 +76,8 @@ module Enumerable
       error_msg
       return
     end
-    self.my_each do |i|
+    ar = self
+    ar.my_each do |i|
       res = yield i
       next unless res == true
 
@@ -86,7 +92,8 @@ module Enumerable
       return
     end
     i = 0
-    self.my_each do
+    ar = self
+    ar.my_each do
       i += 1
     end
     i
@@ -98,7 +105,8 @@ module Enumerable
       return
     end
     i = 0
-    while i < self.length
+    ar = self
+    while i < ar.length
       self[i] = yield self[i]
       i += 1
     end
