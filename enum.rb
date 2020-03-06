@@ -20,7 +20,7 @@ module Enumerable
     end
     i = 0
     self.my_each do |element|
-      puts(i.to_s + " index has " + element.to_s)
+      puts(i.to_s + ' index has ' + element.to_s)
       i = yield i
     end
   end
@@ -30,10 +30,10 @@ module Enumerable
       error_msg
       return
     end
-    self.each do |i|  
-      result=yield i
+    self.each do |i|
+      result = yield i
       next unless result == true
-      
+
       puts i
     end
   end
@@ -43,7 +43,6 @@ module Enumerable
       error_msg
       return
     end
-    
     self.my_each do |i|
       result = yield i
       next unless result == false
@@ -59,7 +58,7 @@ module Enumerable
       return
     end
     self.my_each do |i|
-      result=yield i
+      result = yield i
       next unless result == true
 
       return false
@@ -73,10 +72,10 @@ module Enumerable
       return
     end
     self.my_each do |i|
-        res=yield i
-        next unless res == true
+      res = yield i
+      next unless res == true
 
-        return true
+      return true
     end
     false
   end
@@ -87,7 +86,7 @@ module Enumerable
       return
     end
     i = 0
-    self.my_each do |a|
+    self.my_each do
       i += 1
     end
     i
