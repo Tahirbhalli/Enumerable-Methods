@@ -8,7 +8,7 @@ module Enumerable
       error_msg
       return
     end
-    for el in self
+    self.each do |el|
       yield el
     end
   end
