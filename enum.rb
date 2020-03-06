@@ -140,7 +140,7 @@ arr.my_each do |i|
   puts i
 end
 arr = arr.my_map do |x|
-  x *= 2
+  x = x * 2
 end
 
 val = %w[this is tahir].my_none? do |i|
@@ -150,10 +150,11 @@ val = %w[this is tahir].my_none? do |i|
     false
   end
 end
+puts val
 arr.my_each_with_index
 
 arr.my_select do |x|
-  unless x >=3
+  if x >= 3
     true
   end
 end
