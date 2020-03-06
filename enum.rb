@@ -135,22 +135,13 @@ def multiply_els(arr)
   puts v
 end
 multiply_els(arr)
-=begin
+
 arr.my_each do |i|
   puts i
 end
-
-def multiply_els(arr)
-  v = arr.my_inject do |i,j|
-    i * j
-  end
-  puts v
-end
-
 arr = arr.my_map do |x|
   x *= 2
 end
-multiply_els(arr)
 
 val = %w[this is tahir].my_none? do |i|
   if i.length == 3
@@ -160,7 +151,7 @@ val = %w[this is tahir].my_none? do |i|
   end
 end
 arr.my_each_with_index do |x|
-    x += 1
+  x += 1
 end
 arr.my_select do |x|
   if x >= 3
@@ -169,6 +160,3 @@ arr.my_select do |x|
     false
   end
 end
-
-
-=end
