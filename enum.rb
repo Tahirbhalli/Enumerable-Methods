@@ -1,54 +1,38 @@
 module Enumerable
-  def error_msg
-    puts 'wrong block'
-  end
-
   def my_each
-    if block_given?
-      ar = self
-      ar.each do |el|
-        yield el
-      end
+    return unless block_given?
+    ar = self
+    ar.each do |el|
+      yield el
     end
   end
 
   def my_each_with_index
-    if block_given?
-      i = 0
-      ar = self
-      ar.my_each do |element|
-        yield i, element
-        i += i
-      end
-    else
-      return
-    end
-    
+    return unless block_given?
+    i = 0
+    ar = self
+    ar.my_each do |element|
+      yield i, element
+      i += i
+    end  
   end
 
   def my_select
-    if block_given?
-      ar = self
-      new_arr = []
-      ar.my_each do |i|
-        next unless (yield i) == true
-        new_arr.append(i)
-      end
-      new_arr
-    else
-      return
+    return unless block_given?
+    ar = self
+    new_arr = []
+    ar.my_each do |i|
+      next unless (yield i) == true
+      new_arr.append(i)
     end
-    
+    new_arr    
   end
 
   def my_all?
-    unless block_given?
-      return
-    end
+    return unless block_given?
     ar = self
     ar.my_each do |i|
       next unless (yield i) == false
-
       return false
     end
     true
@@ -69,7 +53,6 @@ module Enumerable
 
   def my_any?
     unless block_given?
-      error_msg
       return
     end
     ar = self
@@ -108,7 +91,6 @@ module Enumerable
 
   def my_inject
     unless block_given?
-      error_msg
       return
     end
     res = 1
