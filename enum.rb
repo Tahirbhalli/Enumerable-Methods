@@ -45,9 +45,8 @@ module Enumerable
   end
 
   def my_none?
-    unless block_given?
-      return
-    end
+    return unless block_given?
+
     ar = self
     ar.my_each do |i|
       next unless (yield i) == true
@@ -58,9 +57,8 @@ module Enumerable
   end
 
   def my_any?
-    unless block_given?
-      return
-    end
+    return unless block_given?
+
     ar = self
     ar.my_each do |i|
       next unless (yield i) == true
@@ -73,6 +71,7 @@ module Enumerable
   def my_count
     if block_given?
       return
+      
     end
     i = 0
     ar = self
@@ -83,9 +82,8 @@ module Enumerable
   end
 
   def my_map
-    unless block_given?
-      return
-    end
+    return unless block_given?
+    
     i = 0
     ar = self
     while i < ar.length
@@ -96,9 +94,8 @@ module Enumerable
   end
 
   def my_inject
-    unless block_given?
-      return
-    end
+    return unless block_given?
+
     res = 1
     ar = self
     ar.length.times do |i|
@@ -117,13 +114,12 @@ def multiply_els(arr)
 end
 multiply_els(arr)
 
-
-p arr.my_inject { |i, j| i * j } == arr.my_inject { |i, j| i * j }
+p arr.inject { |i, j| i * j } == arr.my_inject { |i, j| i * j }
 p arr.my_map{ |x| x * 2 } == arr.map{ |x| x * 2 }
 p arr.count == arr.my_count
-p arr.my_any?{ |x| x >= 0 } == arr.any?{ |x| x >= 0 }
-p arr.my_none?{ |x| x >= 0 } == arr.none?{ |x| x >= 0 }
-p arr.my_all? { |x| x >= 0 } == arr.all?{ |x| x >= 0 }
+p arr.my_any?{ |x| x >= 0 } == arr.any? { |x| x >= 0 }
+p arr.my_none?{ |x| x >= 0 } == arr.none? { |x| x >= 0 }
+p arr.my_all? { |x| x >= 0 } == arr.all? { |x| x >= 0 }
 p arr.my_select { |x| x >= 3 } == arr.select { |x| x >= 3 }
-p arr.my_each_with_index { } == arr.each_with_index { }
+p arr.my_each_with_index {} == arr.each_with_index {}
 p arr.my_each{ |x| } == arr.each{ |x| }
