@@ -15,7 +15,7 @@ module Enumerable
     ar = self
     ar.my_each do |element|
       yield i, element
-      i += i
+      i += 1
     end
   end
 
@@ -82,13 +82,13 @@ module Enumerable
   def my_map
     return unless block_given?
 
-    i = 0
     ar = self
-    while i < ar.length
-      self[i] = yield self[i]
-      i += 1
+    new_arr = []
+    ar.my_each do |j|
+      a = yield j
+      new_arr.append(a)
     end
-    self
+    new_arr
   end
 
   def my_inject
