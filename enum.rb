@@ -4,52 +4,50 @@ module Enumerable
   end
 
   def my_each
-    unless block_given?
-      error_msg
-      return
-    end
-    ar = self
-    ar.each do |el|
-      yield el
+    if block_given?
+      ar = self
+      ar.each do |el|
+        yield el
+      end
     end
   end
 
   def my_each_with_index
     if block_given?
-      error_msg
+      i = 0
+      ar = self
+      ar.my_each do |element|
+        yield i, element
+        i += i
+      end
+    else
       return
     end
-    i = 0
-    ar = self
-    ar.my_each do |element|
-      puts(i.to_s + ' index has ' + element.to_s)
-      i += i
-    end
+    
   end
 
   def my_select
-    unless block_given?
-      error_msg
+    if block_given?
+      ar = self
+      new_arr = []
+      ar.my_each do |i|
+        next unless (yield i) == true
+        new_arr.append(i)
+      end
+      new_arr
+    else
       return
     end
-    ar = self
-    ar.each do |i|
-      result = yield i
-      next unless result == true
-
-      puts i
-    end
+    
   end
 
   def my_all?
     unless block_given?
-      error_msg
       return
     end
     ar = self
     ar.my_each do |i|
-      result = yield i
-      next unless result == false
+      next unless (yield i) == false
 
       return false
     end
@@ -58,13 +56,11 @@ module Enumerable
 
   def my_none?
     unless block_given?
-      error_msg
       return
     end
     ar = self
     ar.my_each do |i|
-      result = yield i
-      next unless result == true
+      next unless (yield i) == true
 
       return false
     end
@@ -78,8 +74,7 @@ module Enumerable
     end
     ar = self
     ar.my_each do |i|
-      res = yield i
-      next unless res == true
+      next unless (yield i) == true
 
       return true
     end
@@ -88,7 +83,6 @@ module Enumerable
 
   def my_count
     if block_given?
-      error_msg
       return
     end
     i = 0
@@ -101,7 +95,6 @@ module Enumerable
 
   def my_map
     unless block_given?
-      error_msg
       return
     end
     i = 0
@@ -136,19 +129,13 @@ def multiply_els(arr)
 end
 multiply_els(arr)
 
-arr.my_each do |i|
-  puts i
-end
-arr = arr.my_map do |x|
-  x * 2
-end
 
-val = %w[this is tahir].my_none? do |i|
-  i.length == 3
-end
-puts val
-arr.my_each_with_index
-
-arr.my_select do |x|
-  x >= 3
-end
+p arr.my_inject { |i, j| i * j } == arr.my_inject { |i, j| i * j }
+p arr.my_map{|x| x * 2} == arr.map{|x| x * 2}
+p arr.count==arr.my_count
+p arr.my_any?{|x| x >= 0} == arr.any?{|x| x >= 0}
+p arr.my_none?{|x| x >= 0} == arr.none?{|x| x >= 0}
+p arr.my_all?{|x| x >= 0} == arr.all?{|x| x >= 0 }
+p arr.my_select {|x| x >= 3} == arr.select {|x| x >= 3}
+p arr.my_each_with_index {} == arr.each_with_index {}
+p arr.my_each{|x|} == arr.each{|x|}
