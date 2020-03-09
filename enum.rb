@@ -120,13 +120,15 @@ module Enumerable
   end
 
   def my_inject(proc = nil)
-    return unless block_given?
+    ar = to_a
+    res = yield ar[0], ar[1]
 
-    ar = self
-    res = yield self[0], self[1]
+    j = 0
+    ar.each do |i|
+      j += 1
+      next if j <= 2
 
-    (ar.length - 2).times do |i|
-      res = yield self[i + 2], res
+      res = yield i, res
     end
     return yield res, proc if proc
 
@@ -186,3 +188,5 @@ p arr.my_all? { |x| x >= 0 } == arr.all? { |x| x >= 0 }
 p arr.my_select { |x| x >= 3 } == arr.select { |x| x >= 3 }
 p arr.my_each_with_index {} == arr.each_with_index {}
 p arr.my_each { |x| } == arr.each { |x| }
+
+(5..9).my_inject { |i, j| i * j } == (5..9).inject { |i, j| i * j }
