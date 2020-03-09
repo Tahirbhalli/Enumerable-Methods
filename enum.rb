@@ -106,7 +106,7 @@ module Enumerable
     new_arr
   end
 
-  def my_inject(num = nil)
+  def my_inject(proc = nil)
     return unless block_given?
 
     ar = self
@@ -115,7 +115,7 @@ module Enumerable
     (ar.length - 2).times do |i|
       res = yield self[i + 2], res
     end
-    return yield res, num if num
+    return yield res, proc if proc
 
     res
   end
@@ -130,7 +130,7 @@ def multiply_els(arr)
 end
 multiply_els(arr)
 puts arr.my_count
-p arr.my_count{ |x| x%2==0 } == arr.count{ |x| x%2==0 }
+p arr.my_count(&:even?) == arr.count(&:even?)
 # p arr.inject { |i, j| i + j } == arr.my_inject { |i, j| i + j }
 # p arr.my_map { |x| x * 2 } == arr.map { |x| x * 2 }
 # p arr.count == arr.my_count
