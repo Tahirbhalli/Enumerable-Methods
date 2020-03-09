@@ -1,6 +1,6 @@
 module Enumerable
   def my_each
-    return unless block_given?
+    return Enumerator unless block_given?
 
     ar = self
     ar.each do |el|
@@ -9,7 +9,7 @@ module Enumerable
   end
 
   def my_each_with_index
-    return unless block_given?
+    return Enumerator unless block_given?
 
     i = 0
     ar = self
@@ -20,7 +20,7 @@ module Enumerable
   end
 
   def my_select
-    return unless block_given?
+    return Enumerator unless block_given?
 
     ar = self
     new_arr = []
@@ -42,11 +42,12 @@ module Enumerable
 
         return false
       end
+      return true
     end
 
-    return true if ar.my_count.zero?
+    return false if ar.include? false or ar.include? nil
 
-    !(!ar[0])
+    true
   end
 
   def my_none?(proc = nil)
@@ -106,7 +107,7 @@ module Enumerable
   end
 
   def my_map
-    return unless block_given?
+    return Enumerator unless block_given?
 
     ar = self
     new_arr = []
@@ -140,9 +141,24 @@ def multiply_els(arr)
   puts v
 end
 multiply_els(arr)
+p [].all? == [].my_all?
+puts [].all?
+true_array = [nil, false, true, []]
+false_array = [nil, false, nil, false]
+p false_array.none? == false_array.my_none?
+p true_array.none? == true_array.my_none?
+
+true_array = [1, false, 'hi', []]
+
+p false_array.my_all? == true_array.all? # true
+
+true_array = [nil, false, true, []]
+p true_array.my_any? == true_array.any? # true
+
+p arr.my_each == Enumerator # 1 true
 
 p [nil, true, 99].my_all? == [nil, true, 99].all?
-p [].all? == [].my_all?
+
 p [].none? == [].my_none?
 p [nil].my_none? == [nil].none?
 p [nil, false].none? == [nil, false].my_none?
