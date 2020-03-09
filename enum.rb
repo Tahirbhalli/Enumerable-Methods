@@ -68,11 +68,12 @@ module Enumerable
     false
   end
 
-  def my_count
+  def my_count(proc=nil)
     return if block_given?
 
     i = 0
     ar = self
+
     ar.my_each do
       i += 1
     end
@@ -91,15 +92,19 @@ module Enumerable
     new_arr
   end
 
-  def my_inject
+  def my_inject(num = nil)
     return unless block_given?
 
-    res = 1
     ar = self
-    ar.length.times do |i|
-      res = yield self[i], res
+    res = yield self[0], self[1]
+
+    (ar.length - 2).times do |i|
+      res = yield self[i + 2], res
     end
-    res
+    if num
+      return yield res, num
+    end
+    return res
   end
 end
 
@@ -111,8 +116,8 @@ def multiply_els(arr)
   puts v
 end
 multiply_els(arr)
-
-p arr.inject { |i, j| i * j } == arr.my_inject { |i, j| i * j }
+puts arr.my_count{}
+p arr.inject { |i, j| i + j } == arr.my_inject { |i, j| i + j }
 p arr.my_map { |x| x * 2 } == arr.map { |x| x * 2 }
 p arr.count == arr.my_count
 p arr.my_any? { |x| x >= 0 } == arr.any? { |x| x >= 0 }
