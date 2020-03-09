@@ -141,8 +141,16 @@ def multiply_els(arr)
   puts v
 end
 multiply_els(arr)
+
+true_array = [nil, false, true, []]
+false_array = [nil, false, nil, false]
+puts false_array.my_none? # true
+puts true_array.my_none? # false
+array = Array.new(100) { rand(0...9) }
+p array.my_map == Enumerator # true
+
 p [].all? == [].my_all?
-puts [].all?
+puts [].my_all?
 true_array = [nil, false, true, []]
 false_array = [nil, false, nil, false]
 p false_array.none? == false_array.my_none?
