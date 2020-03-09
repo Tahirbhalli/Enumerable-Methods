@@ -140,21 +140,23 @@ def multiply_els(arr)
   puts v
 end
 multiply_els(arr)
+
 #puts arr.my_none?(Float)
-puts [].all?
+
+
 p [nil, true, 99].my_all? == [nil, true, 99].all?
 p [].all? == [].my_all?
-#p [].none? == [].my_none?
-#p [nil].my_none? == [nil].my_none?
-#p [nil, false].none? == [nil, false].my_none?
-#p [nil, true, 99].my_any?(Integer) == [nil, true, 99].any?(Integer)
-# p arr.my_count(&:even?) == arr.count(&:even?)
-# p arr.inject { |i, j| i + j } == arr.my_inject { |i, j| i + j }
-# p arr.my_map { |x| x * 2 } == arr.map { |x| x * 2 }
-# p arr.count == arr.my_count
-# p arr.my_any? { |x| x >= 0 } == arr.any? { |x| x >= 0 }
-# p arr.my_none? { |x| x >= 0 } == arr.none? { |x| x >= 0 }
-# p arr.my_all? { |x| x >= 0 } == arr.all? { |x| x >= 0 }
-# p arr.my_select { |x| x >= 3 } == arr.select { |x| x >= 3 }
-# p arr.my_each_with_index {} == arr.each_with_index {}
-# p arr.my_each { |x| } == arr.each { |x| }
+p [].none? == [].my_none?
+p [nil].my_none? == [nil].my_none?
+p [nil, false].none? == [nil, false].my_none?
+p [nil, true, 99].my_any?(Integer) == [nil, true, 99].any?(Integer)
+p arr.my_count(&:even?) == arr.count(&:even?)
+p arr.inject { |i, j| i + j } == arr.my_inject { |i, j| i + j }
+p arr.my_map { |x| x * 2 } == arr.map { |x| x * 2 }
+p arr.count == arr.my_count
+p arr.my_any? { |x| x >= 0 } == arr.any? { |x| x >= 0 }
+p arr.my_none? { |x| x >= 0 } == arr.none? { |x| x >= 0 }
+p arr.my_all? { |x| x >= 0 } == arr.all? { |x| x >= 0 }
+p arr.my_select { |x| x >= 3 } == arr.select { |x| x >= 3 }
+p arr.my_each_with_index {} == arr.each_with_index {}
+p arr.my_each { |x| } == arr.each { |x| }
