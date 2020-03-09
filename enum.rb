@@ -60,6 +60,7 @@ module Enumerable
 
         return false
       end
+      return true
     end
     !ar[ar.length - 1]
   end
@@ -119,8 +120,6 @@ module Enumerable
   end
 
   def my_inject(proc = nil)
-    return inject(proc) if proc
-
     return unless block_given?
 
     ar = self
@@ -144,14 +143,21 @@ def multiply_els(arr)
 end
 multiply_els(arr)
 
-true_array = [nil, false, true, []]
-false_array = [nil, false, nil, false]
-puts false_array.my_none? # true
-puts true_array.my_none? # false
+p [5, 6, 7, 8, 9, 10].my_inject(4) { |prod, n| prod * n } == [5, 6, 7, 8, 9, 10].inject(4) { |prod, n| prod * n }
+
+p [1, 2, 3, 4, 5].my_select == [1, 2, 3, 4, 5].select # Enumerator and Enumerator+0cxajsdhkjahd(addr)
+p [1, 2, 3, 4, 5].my_each_with_index == [1, 2, 3, 4, 5].each_with_index # Enumerator and Enumerator+0cxajsdhkjahd(addr)
+
+p [1, 2, 3, 4, 5].my_any? { |num| num > 5 } == [1, 2, 3, 4, 5].any? { |num| num > 5 }
+p [1, 2, 3, 4, 5].my_none? { |num| num > 5 } == [1, 2, 3, 4, 5].none? { |num| num > 5 }
+
 array = Array.new(100) { rand(0...9) }
 p array.my_inject(:+) == array.inject(:+)
 p array.my_map == Enumerator # true
-
+true_array = [nil, false, true, []]
+false_array = [nil, false, nil, false]
+puts false_array.none? # true
+puts true_array.none? # false
 p [].all? == [].my_all?
 puts [].my_all?
 true_array = [nil, false, true, []]
