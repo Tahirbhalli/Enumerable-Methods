@@ -150,7 +150,7 @@ p true_array.none? == true_array.my_none?
 
 true_array = [1, false, 'hi', []]
 
-p false_array.my_all? == true_array.all? # true
+p true_array.my_all? == true_array.all? # true
 
 true_array = [nil, false, true, []]
 p true_array.my_any? == true_array.any? # true
