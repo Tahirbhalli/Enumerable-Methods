@@ -119,6 +119,8 @@ module Enumerable
   end
 
   def my_inject(proc = nil)
+    return inject(proc) if proc
+
     return unless block_given?
 
     ar = self
@@ -147,6 +149,7 @@ false_array = [nil, false, nil, false]
 puts false_array.my_none? # true
 puts true_array.my_none? # false
 array = Array.new(100) { rand(0...9) }
+p array.my_inject(:+) == array.inject(:+)
 p array.my_map == Enumerator # true
 
 p [].all? == [].my_all?
