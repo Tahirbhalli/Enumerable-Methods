@@ -68,11 +68,25 @@ module Enumerable
     false
   end
 
-  def my_count(proc=nil)
-    return if block_given?
-
-    i = 0
+  def my_count(proc = nil)
     ar = self
+    i = 0
+    if proc
+      ar.my_each do |x|
+        next unless x == proc
+
+        i += 1
+      end
+      return i
+    end
+    if block_given?
+      ar.my_each do |x|
+        next unless (yield x) == true
+
+        i += 1
+      end
+      return i
+    end
 
     ar.my_each do
       i += 1
@@ -101,14 +115,13 @@ module Enumerable
     (ar.length - 2).times do |i|
       res = yield self[i + 2], res
     end
-    if num
-      return yield res, num
-    end
-    return res
+    return yield res, num if num
+
+    res
   end
 end
 
-arr = [1, 2, 3, 4, 5]
+arr = [1, 2, 2, 4, 5]
 def multiply_els(arr)
   v = arr.my_inject do |i, j|
     i * j
@@ -116,13 +129,14 @@ def multiply_els(arr)
   puts v
 end
 multiply_els(arr)
-puts arr.my_count{}
-p arr.inject { |i, j| i + j } == arr.my_inject { |i, j| i + j }
-p arr.my_map { |x| x * 2 } == arr.map { |x| x * 2 }
-p arr.count == arr.my_count
-p arr.my_any? { |x| x >= 0 } == arr.any? { |x| x >= 0 }
-p arr.my_none? { |x| x >= 0 } == arr.none? { |x| x >= 0 }
-p arr.my_all? { |x| x >= 0 } == arr.all? { |x| x >= 0 }
-p arr.my_select { |x| x >= 3 } == arr.select { |x| x >= 3 }
-p arr.my_each_with_index {} == arr.each_with_index {}
-p arr.my_each { |x| } == arr.each { |x| }
+puts arr.my_count
+p arr.my_count{ |x| x%2==0 } == arr.count{ |x| x%2==0 }
+# p arr.inject { |i, j| i + j } == arr.my_inject { |i, j| i + j }
+# p arr.my_map { |x| x * 2 } == arr.map { |x| x * 2 }
+# p arr.count == arr.my_count
+# p arr.my_any? { |x| x >= 0 } == arr.any? { |x| x >= 0 }
+# p arr.my_none? { |x| x >= 0 } == arr.none? { |x| x >= 0 }
+# p arr.my_all? { |x| x >= 0 } == arr.all? { |x| x >= 0 }
+# p arr.my_select { |x| x >= 3 } == arr.select { |x| x >= 3 }
+# p arr.my_each_with_index {} == arr.each_with_index {}
+# p arr.my_each { |x| } == arr.each { |x| }
