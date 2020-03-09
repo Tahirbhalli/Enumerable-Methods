@@ -44,16 +44,19 @@ module Enumerable
     true
   end
 
-  def my_none?
-    return unless block_given?
-
+  def my_none?(proc=nil)
     ar = self
-    ar.my_each do |i|
-      next unless (yield i) == true
-
-      return false
+    if proc
+      return ar.none?(proc)
     end
-    true
+    if block_given?
+      ar.my_each do |i|
+        next unless (yield i) == true
+
+        return false
+      end
+    end
+    return !ar[ar.length - 1]
   end
 
   def my_any?(proc = nil)
@@ -133,9 +136,12 @@ def multiply_els(arr)
   puts v
 end
 multiply_els(arr)
-puts Integer
+#puts arr.my_none?(Float)
 
-p [nil, true, 99].my_any?(Integer) == [nil, true, 99].any?(Integer)
+p [].none? == [].my_none?
+p [nil].my_none? == [nil].my_none?
+p [nil, false].none? == [nil, false].my_none?
+#p [nil, true, 99].my_any?(Integer) == [nil, true, 99].any?(Integer)
 # p arr.my_count(&:even?) == arr.count(&:even?)
 # p arr.inject { |i, j| i + j } == arr.my_inject { |i, j| i + j }
 # p arr.my_map { |x| x * 2 } == arr.map { |x| x * 2 }
