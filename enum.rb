@@ -45,10 +45,11 @@ module Enumerable
     end
 
     return true if ar.my_count.zero?
-    !!ar[0]
+
+    !(!ar[0])
   end
 
-  def my_none?(proc=nil)
+  def my_none?(proc = nil)
     ar = self
     return ar.none?(proc) if proc
 
