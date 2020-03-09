@@ -1,6 +1,6 @@
 module Enumerable
   def my_each
-    return Enumerator unless block_given?
+    return to_enum unless block_given?
 
     ar = self
     ar.each do |el|
@@ -9,7 +9,7 @@ module Enumerable
   end
 
   def my_each_with_index
-    return Enumerator unless block_given?
+    return to_enum unless block_given?
 
     i = 0
     ar = self
@@ -20,7 +20,7 @@ module Enumerable
   end
 
   def my_select
-    return Enumerator unless block_given?
+    return to_enum unless block_given?
 
     ar = self
     new_arr = []
@@ -108,7 +108,7 @@ module Enumerable
   end
 
   def my_map
-    return Enumerator unless block_given?
+    return to_enum unless block_given?
 
     ar = self
     new_arr = []
@@ -143,6 +143,7 @@ def multiply_els(arr)
 end
 multiply_els(arr)
 
+p arr.each == arr.my_each
 p [5, 6, 7, 8, 9, 10].my_inject(4) { |prod, n| prod * n } == [5, 6, 7, 8, 9, 10].inject(4) { |prod, n| prod * n }
 
 p [1, 2, 3, 4, 5].my_select == [1, 2, 3, 4, 5].select # Enumerator and Enumerator+0cxajsdhkjahd(addr)
@@ -152,8 +153,8 @@ p [1, 2, 3, 4, 5].my_any? { |num| num > 5 } == [1, 2, 3, 4, 5].any? { |num| num 
 p [1, 2, 3, 4, 5].my_none? { |num| num > 5 } == [1, 2, 3, 4, 5].none? { |num| num > 5 }
 
 array = Array.new(100) { rand(0...9) }
-p array.my_inject(:+) == array.inject(:+)
-p array.my_map == Enumerator # true
+p array.my_inject(:+) == array.inject(:+) # Enumerator and Enumerator+0cxajsdhkjahd(addr)
+
 true_array = [nil, false, true, []]
 false_array = [nil, false, nil, false]
 puts false_array.none? # true
