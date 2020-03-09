@@ -143,17 +143,14 @@ def multiply_els(arr)
 end
 multiply_els(arr)
 
-p arr.each == arr.my_each
+p arr.each.class == arr.my_each.class
 p [5, 6, 7, 8, 9, 10].my_inject(4) { |prod, n| prod * n } == [5, 6, 7, 8, 9, 10].inject(4) { |prod, n| prod * n }
 
-p [1, 2, 3, 4, 5].my_select == [1, 2, 3, 4, 5].select # Enumerator and Enumerator+0cxajsdhkjahd(addr)
-p [1, 2, 3, 4, 5].my_each_with_index == [1, 2, 3, 4, 5].each_with_index # Enumerator and Enumerator+0cxajsdhkjahd(addr)
+p [1, 2, 3, 4, 5].my_select.class == [1, 2, 3, 4, 5].select.class # Enumerator and Enumerator+0cxajsdhkjahd(addr)
+p arr.my_each_with_index.class == arr.each_with_index.class # Enumerator and Enumerator+0cxajsdhkjahd(addr)
 
 p [1, 2, 3, 4, 5].my_any? { |num| num > 5 } == [1, 2, 3, 4, 5].any? { |num| num > 5 }
 p [1, 2, 3, 4, 5].my_none? { |num| num > 5 } == [1, 2, 3, 4, 5].none? { |num| num > 5 }
-
-array = Array.new(100) { rand(0...9) }
-p array.my_inject(:+) == array.inject(:+) # Enumerator and Enumerator+0cxajsdhkjahd(addr)
 
 true_array = [nil, false, true, []]
 false_array = [nil, false, nil, false]
@@ -172,8 +169,6 @@ p true_array.my_all? == true_array.all? # true
 
 true_array = [nil, false, true, []]
 p true_array.my_any? == true_array.any? # true
-
-p arr.my_each == Enumerator # 1 true
 
 p [nil, true, 99].my_all? == [nil, true, 99].all?
 
