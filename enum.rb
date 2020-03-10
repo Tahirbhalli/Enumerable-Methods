@@ -14,7 +14,7 @@ module Enumerable
     i = 0
     ar = self
     ar.my_each do |element|
-      yield i, element
+      yield element, i
       i += 1
     end
   end
@@ -78,7 +78,7 @@ module Enumerable
       return false
     end
 
-    true
+    false
   end
 
   def my_count(proc = nil)
@@ -119,7 +119,10 @@ module Enumerable
     new_arr
   end
 
-  def my_inject(proc = nil)
+  def my_inject(proc = nil, ope = nil)
+    return inject(proc, ope) unless ope.nil?
+    return true if proc
+
     ar = to_a
     res = yield ar[0], ar[1]
 
@@ -188,5 +191,17 @@ p arr.my_all? { |x| x >= 0 } == arr.all? { |x| x >= 0 }
 p arr.my_select { |x| x >= 3 } == arr.select { |x| x >= 3 }
 p arr.my_each_with_index {} == arr.each_with_index {}
 p arr.my_each { |x| } == arr.each { |x| }
+# test cases of Tse team asked
+# p (5..9).my_inject { |i, j| i * j } == (5..9).inject { |i, j| i * j }
+# p (1..2).my_inject(2, :*) == (1..2).inject(2, :*)
+p [nil, false, nil, false].my_any? == [nil, false, nil, false].any?
+p [nil, false, nil, false].my_any? == [nil, false, nil, false].any?
 
-(5..9).my_inject { |i, j| i * j } == (5..9).inject { |i, j| i * j }
+my_each_output = ''
+my_each_output_two = ''
+block = proc { |y, x| my_each_output += "Hello: #{y}, in: #{x}\n" }
+block_two = proc { |y, x| my_each_output_two += "Hello: #{y}, in: #{x}\n" }
+[1, 2, 32, 32, 3, 21, 1, 23, 12].each_with_index(&block_two)
+[1, 2, 32, 32, 3, 21, 1, 23, 12].my_each_with_index(&block)
+
+p my_each_output == my_each_output_two
