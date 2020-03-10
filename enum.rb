@@ -108,11 +108,17 @@ module Enumerable
     i
   end
 
-  def my_map
-    return to_enum unless block_given?
-
+  def my_map(proc = nil)
     ar = self
     new_arr = []
+    unless proc.nil?
+      ar.each do |x|
+        return false unless proc.yield x
+      end
+      return true
+    end
+    return to_enum unless block_given? && proc.nil?
+
     ar.my_each do |j|
       a = yield j
       new_arr.append(a)
@@ -121,6 +127,7 @@ module Enumerable
   end
 
   def my_inject(proc = nil, ope = nil)
+    return inject(proc) if ope == nil?
     return inject(proc, ope) unless ope.nil?
 
     ar = to_a
@@ -139,7 +146,13 @@ module Enumerable
   end
 end
 
+puts [1, 1, 1].inject(:+)
+
+my_proc = proc { |num| num.positive? }
+
 arr = [1, 2, 2, 4, 5]
+va = arr.my_map(my_proc)
+puts va
 def multiply_els(arr)
   v = arr.my_inject do |i, j|
     i * j
@@ -149,12 +162,12 @@ end
 multiply_els(arr)
 
 true_array = [nil, false, true, []]
-p true_array.my_any? == true_array.any? # true
+p true_array.my_any? == true_array.any?
 p arr.each.class == arr.my_each.class
 p [5, 6, 7, 8, 9, 10].my_inject(4) { |prod, n| prod * n } == [5, 6, 7, 8, 9, 10].inject(4) { |prod, n| prod * n }
 
-p [1, 2, 3, 4, 5].my_select.class == [1, 2, 3, 4, 5].select.class # Enumerator and Enumerator+0cxajsdhkjahd(addr)
-p arr.my_each_with_index.class == arr.each_with_index.class # Enumerator and Enumerator+0cxajsdhkjahd(addr)
+p [1, 2, 3, 4, 5].my_select.class == [1, 2, 3, 4, 5].select.class
+p arr.my_each_with_index.class == arr.each_with_index.class
 
 p [1, 2, 3, 4, 5].my_any? { |num| num > 5 } == [1, 2, 3, 4, 5].any? { |num| num > 5 }
 p [1, 2, 3, 4, 5].my_none? { |num| num > 5 } == [1, 2, 3, 4, 5].none? { |num| num > 5 }
@@ -168,10 +181,10 @@ p true_array.none? == true_array.my_none?
 
 true_array = [1, false, 'hi', []]
 
-p true_array.my_all? == true_array.all? # true
+p true_array.my_all? == true_array.all?
 
 true_array = [nil, false, true, []]
-p true_array.my_any? == true_array.any? # true
+p true_array.my_any? == true_array.any?
 
 p [nil, true, 99].my_all? == [nil, true, 99].all?
 
@@ -189,9 +202,7 @@ p arr.my_all? { |x| x >= 0 } == arr.all? { |x| x >= 0 }
 p arr.my_select { |x| x >= 3 } == arr.select { |x| x >= 3 }
 p arr.my_each_with_index {} == arr.each_with_index {}
 p arr.my_each { |x| } == arr.each { |x| }
-# test cases of Tse team asked
-# p (5..9).my_inject { |i, j| i * j } == (5..9).inject { |i, j| i * j }
-# p (1..2).my_inject(2, :*) == (1..2).inject(2, :*)
+
 p [nil, false, nil, false].my_any? == [nil, false, nil, false].any?
 p [nil, false, nil, false].my_any? == [nil, false, nil, false].any?
 
