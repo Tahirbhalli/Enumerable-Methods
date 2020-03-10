@@ -77,7 +77,7 @@ module Enumerable
       end
       return false
     end
-    return true if !ar.member? nil or !ar.member? false
+    return true if !ar.member? nil or ar.include? true
 
     false
   end
@@ -122,7 +122,6 @@ module Enumerable
 
   def my_inject(proc = nil, ope = nil)
     return inject(proc, ope) unless ope.nil?
-    return true if proc
 
     ar = to_a
     res = yield ar[0], ar[1]
@@ -149,6 +148,8 @@ def multiply_els(arr)
 end
 multiply_els(arr)
 
+true_array = [nil, false, true, []]
+p true_array.my_any? == true_array.any? # true
 p arr.each.class == arr.my_each.class
 p [5, 6, 7, 8, 9, 10].my_inject(4) { |prod, n| prod * n } == [5, 6, 7, 8, 9, 10].inject(4) { |prod, n| prod * n }
 
@@ -158,12 +159,8 @@ p arr.my_each_with_index.class == arr.each_with_index.class # Enumerator and Enu
 p [1, 2, 3, 4, 5].my_any? { |num| num > 5 } == [1, 2, 3, 4, 5].any? { |num| num > 5 }
 p [1, 2, 3, 4, 5].my_none? { |num| num > 5 } == [1, 2, 3, 4, 5].none? { |num| num > 5 }
 
-true_array = [nil, false, true, []]
-false_array = [nil, false, nil, false]
-puts false_array.none? # true
-puts true_array.none? # false
 p [].all? == [].my_all?
-puts [].my_all?
+
 true_array = [nil, false, true, []]
 false_array = [nil, false, nil, false]
 p false_array.none? == false_array.my_none?
