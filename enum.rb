@@ -77,6 +77,7 @@ module Enumerable
       end
       return false
     end
+    return true if !ar.member? nil or !ar.member? false
 
     false
   end
@@ -205,3 +206,4 @@ block_two = proc { |y, x| my_each_output_two += "Hello: #{y}, in: #{x}\n" }
 [1, 2, 32, 32, 3, 21, 1, 23, 12].my_each_with_index(&block)
 
 p my_each_output == my_each_output_two
+p [1, false].any? == [1, false].my_any?
