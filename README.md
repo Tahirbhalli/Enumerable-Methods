@@ -1,11 +1,8 @@
-# Enumeration
+# Enumerable
 > Project built using basic Ruby.
   This project contains:
-- A Module Enumeration which contains different method with different functionalitys.
+  This is a console base Game build in ruby. And object oriented programing concepts is used in the project
 
-
-# What it does
-We use these method with namespace for different uses
 ## Built With
 - Ruby
 
@@ -24,6 +21,11 @@ Contributions, issues and feature requests are welcome! Start by:
 Special thanks to [The Odin Project](https://www.theodinproject.com/courses/ruby-programming/lessons/advanced-building-blocks) 
 
 ## Authors
+
+👤 **Sergio Perdomo**
+
+- Github: [@sddoe](https://github.com/sddoe)
+- Linkedin: [sergio-perdomo](https://www.linkedin.com/in/sergio-david-perdomo-rivera-07b6b7b8/)
 
 👤 **Tahir Ahmad**
 
