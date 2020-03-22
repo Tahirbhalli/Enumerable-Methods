@@ -159,4 +159,3 @@ def multiply_els(arr)
   end
   puts v
 end
-
