@@ -20,4 +20,8 @@ describe 'Enumerable' do
     true_array = [nil, false, true, []]
     true_array.my_any?.equal? true_array.any?
   end
+  it 'my_map' do
+    arr = [1, 2, 3, 4, 5]
+    expect(arr.my_count.class.equal?(arr.count.class)).to eq(true)
+  end
 end
