@@ -67,4 +67,8 @@ describe 'Enumerable' do
     arr = [1, 2, 3, 4, 5]
     expect(arr.my_count.class.equal?(arr.count.class)).to eq(true)
   end
+  it 'my_each_wit index' do
+    arr = [1, 2, 3, 4, 5, 6]
+    expect(arr.my_each_with_index { |_i, j| j < 3 }).to eq(arr.each_with_index { |_i, j| j < 3 })
+  end
 end
